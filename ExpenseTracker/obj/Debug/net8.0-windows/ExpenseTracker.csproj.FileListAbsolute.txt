@@ -113,3 +113,4 @@ C:\Users\Nirajan\Desktop\High_Quality_Software_Programming_Group_Project\Expense
 C:\Users\Nirajan\Desktop\High_Quality_Software_Programming_Group_Project\ExpenseTracker\obj\Debug\net8.0-windows\ExpenseTracker.pdb
 C:\Users\Nirajan\Desktop\High_Quality_Software_Programming_Group_Project\ExpenseTracker\obj\Debug\net8.0-windows\ExpenseTracker.genruntimeconfig.cache
 C:\Users\Nirajan\Desktop\High_Quality_Software_Programming_Group_Project\ExpenseTracker\obj\Debug\net8.0-windows\ref\ExpenseTracker.dll
+C:\Users\Nirajan\Desktop\High_Quality_Software_Programming_Group_Project\ExpenseTracker\obj\Debug\net8.0-windows\ExpenseTracker.MainForm.resources
