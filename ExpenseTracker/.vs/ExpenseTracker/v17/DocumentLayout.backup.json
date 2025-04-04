@@ -3,19 +3,27 @@
   "WorkspaceRootPath": "C:\\Users\\Nirajan\\Desktop\\High_Quality_Software_Programming_Group_Project\\ExpenseTracker\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E37A7087-22C4-48E3-91BA-6B706FE6CECB}|ExpenseTracker.csproj|c:\\users\\nirajan\\desktop\\high_quality_software_programming_group_project\\expensetracker\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E37A7087-22C4-48E3-91BA-6B706FE6CECB}|ExpenseTracker.csproj|solutionrelative:mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E37A7087-22C4-48E3-91BA-6B706FE6CECB}|ExpenseTracker.csproj|c:\\users\\nirajan\\desktop\\high_quality_software_programming_group_project\\expensetracker\\database\\income_managementdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E37A7087-22C4-48E3-91BA-6B706FE6CECB}|ExpenseTracker.csproj|solutionrelative:database\\income_managementdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E37A7087-22C4-48E3-91BA-6B706FE6CECB}|ExpenseTracker.csproj|c:\\users\\nirajan\\desktop\\high_quality_software_programming_group_project\\expensetracker\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E37A7087-22C4-48E3-91BA-6B706FE6CECB}|ExpenseTracker.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E37A7087-22C4-48E3-91BA-6B706FE6CECB}|ExpenseTracker.csproj|c:\\users\\nirajan\\desktop\\high_quality_software_programming_group_project\\expensetracker\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E37A7087-22C4-48E3-91BA-6B706FE6CECB}|ExpenseTracker.csproj|solutionrelative:mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E37A7087-22C4-48E3-91BA-6B706FE6CECB}|ExpenseTracker.csproj|c:\\users\\nirajan\\desktop\\high_quality_software_programming_group_project\\expensetracker\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E37A7087-22C4-48E3-91BA-6B706FE6CECB}|ExpenseTracker.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E37A7087-22C4-48E3-91BA-6B706FE6CECB}|ExpenseTracker.csproj|c:\\users\\nirajan\\desktop\\high_quality_software_programming_group_project\\expensetracker\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{E37A7087-22C4-48E3-91BA-6B706FE6CECB}|ExpenseTracker.csproj|c:\\users\\nirajan\\desktop\\high_quality_software_programming_group_project\\expensetracker\\expensetracker.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{E37A7087-22C4-48E3-91BA-6B706FE6CECB}|ExpenseTracker.csproj|solutionrelative:expensetracker.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E37A7087-22C4-48E3-91BA-6B706FE6CECB}|ExpenseTracker.csproj|c:\\users\\nirajan\\desktop\\high_quality_software_programming_group_project\\expensetracker\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E37A7087-22C4-48E3-91BA-6B706FE6CECB}|ExpenseTracker.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E37A7087-22C4-48E3-91BA-6B706FE6CECB}|ExpenseTracker.csproj|C:\\Users\\Nirajan\\Desktop\\High_Quality_Software_Programming_Group_Project\\ExpenseTracker\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{E37A7087-22C4-48E3-91BA-6B706FE6CECB}|ExpenseTracker.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -26,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 322,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,7 +46,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "income_managementdb.cs",
+              "DocumentMoniker": "C:\\Users\\Nirajan\\Desktop\\High_Quality_Software_Programming_Group_Project\\ExpenseTracker\\Database\\income_managementdb.cs",
+              "RelativeDocumentMoniker": "Database\\income_managementdb.cs",
+              "ToolTip": "C:\\Users\\Nirajan\\Desktop\\High_Quality_Software_Programming_Group_Project\\ExpenseTracker\\Database\\income_managementdb.cs",
+              "RelativeToolTip": "Database\\income_managementdb.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-04T03:32:31.894Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ExpenseTracker.csproj",
+              "DocumentMoniker": "C:\\Users\\Nirajan\\Desktop\\High_Quality_Software_Programming_Group_Project\\ExpenseTracker\\ExpenseTracker.csproj",
+              "RelativeDocumentMoniker": "ExpenseTracker.csproj",
+              "ToolTip": "C:\\Users\\Nirajan\\Desktop\\High_Quality_Software_Programming_Group_Project\\ExpenseTracker\\ExpenseTracker.csproj",
+              "RelativeToolTip": "ExpenseTracker.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-04T03:03:53.868Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Nirajan\\Desktop\\High_Quality_Software_Programming_Group_Project\\ExpenseTracker\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -46,21 +79,19 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-04T01:35:26.382Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-04T01:35:26.382Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MainForm.Designer.cs",
               "DocumentMoniker": "C:\\Users\\Nirajan\\Desktop\\High_Quality_Software_Programming_Group_Project\\ExpenseTracker\\MainForm.Designer.cs",
               "RelativeDocumentMoniker": "MainForm.Designer.cs",
               "ToolTip": "C:\\Users\\Nirajan\\Desktop\\High_Quality_Software_Programming_Group_Project\\ExpenseTracker\\MainForm.Designer.cs",
               "RelativeToolTip": "MainForm.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFYAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAQwGkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-04T01:31:41.393Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-04T01:31:41.393Z"
             },
             {
               "$type": "Document",
@@ -70,22 +101,21 @@
               "RelativeDocumentMoniker": "MainForm.cs",
               "ToolTip": "C:\\Users\\Nirajan\\Desktop\\High_Quality_Software_Programming_Group_Project\\ExpenseTracker\\MainForm.cs",
               "RelativeToolTip": "MainForm.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAAA1wFYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-04T01:31:07.38Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "MainForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Nirajan\\Desktop\\High_Quality_Software_Programming_Group_Project\\ExpenseTracker\\MainForm.cs",
               "RelativeDocumentMoniker": "MainForm.cs",
               "ToolTip": "C:\\Users\\Nirajan\\Desktop\\High_Quality_Software_Programming_Group_Project\\ExpenseTracker\\MainForm.cs [Design]",
               "RelativeToolTip": "MainForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-04T01:29:38.016Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-04-04T01:29:38.016Z"
             }
           ]
         },

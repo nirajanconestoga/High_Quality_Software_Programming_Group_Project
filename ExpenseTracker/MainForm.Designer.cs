@@ -1,91 +1,105 @@
-﻿namespace ExpenseTracker
+﻿using System.Drawing;
+using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
+
+namespace ExpenseTracker
 {
     partial class MainForm
     {
         private System.ComponentModel.IContainer components = null;
 
-        // Declare all controls here
-        private System.Windows.Forms.Label lblWelcome;
-        private System.Windows.Forms.Button btnIncome;
-        private System.Windows.Forms.Button btnExpenses;
-        private System.Windows.Forms.Button btnBudget;
-        private System.Windows.Forms.Button btnCategories;
+        private Label lblWelcome;
+        private Button btnIncome;
+        private Button btnExpenses;
+        private Button btnBudget;
+        private Button btnCategories;
+        private Chart chartSummary;
 
-        
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
                 components.Dispose();
             base.Dispose(disposing);
         }
+
         private void InitializeComponent()
         {
-            this.lblWelcome = new System.Windows.Forms.Label();
-            this.btnIncome = new System.Windows.Forms.Button();
-            this.btnExpenses = new System.Windows.Forms.Button();
-            this.btnBudget = new System.Windows.Forms.Button();
-            this.btnCategories = new System.Windows.Forms.Button();
-            this.SuspendLayout();
-           
+            lblWelcome = new Label();
+            btnIncome = new Button();
+            btnExpenses = new Button();
+            btnBudget = new Button();
+            btnCategories = new Button();
+            chartSummary = new Chart();
+            ChartArea chartArea1 = new ChartArea();
+            Legend legend1 = new Legend();
+
+            SuspendLayout();
+
             // lblWelcome
-            this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblWelcome.Location = new System.Drawing.Point(30, 20);
-            this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(350, 32);
-            this.lblWelcome.TabIndex = 0;
-            this.lblWelcome.Text = "📊 Welcome to Expense Tracker";
-         
+            lblWelcome.AutoSize = true;
+            lblWelcome.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblWelcome.Location = new Point(30, 20);
+            lblWelcome.Name = "lblWelcome";
+            lblWelcome.Size = new Size(381, 32);
+            lblWelcome.Text = "📊 Welcome to Expense Tracker";
+
             // btnIncome
-            this.btnIncome.Location = new System.Drawing.Point(30, 70);
-            this.btnIncome.Name = "btnIncome";
-            this.btnIncome.Size = new System.Drawing.Size(250, 40);
-            this.btnIncome.TabIndex = 1;
-            this.btnIncome.Text = "Manage Income";
-            this.btnIncome.UseVisualStyleBackColor = true;
-            this.btnIncome.Click += new System.EventHandler(this.btnIncome_Click);
-            // btnExpenses 
-            this.btnExpenses.Location = new System.Drawing.Point(30, 120);
-            this.btnExpenses.Name = "btnExpenses";
-            this.btnExpenses.Size = new System.Drawing.Size(250, 40);
-            this.btnExpenses.TabIndex = 2;
-            this.btnExpenses.Text = "Manage Expenses";
-            this.btnExpenses.UseVisualStyleBackColor = true;
-            this.btnExpenses.Click += new System.EventHandler(this.btnExpenses_Click);
-       
+            btnIncome.Location = new Point(30, 70);
+            btnIncome.Name = "btnIncome";
+            btnIncome.Size = new Size(250, 40);
+            btnIncome.Text = "Manage Income";
+            btnIncome.UseVisualStyleBackColor = true;
+            btnIncome.Click += btnIncome_Click;
+
+            // btnExpenses
+            btnExpenses.Location = new Point(30, 120);
+            btnExpenses.Name = "btnExpenses";
+            btnExpenses.Size = new Size(250, 40);
+            btnExpenses.Text = "Manage Expenses";
+            btnExpenses.UseVisualStyleBackColor = true;
+            btnExpenses.Click += btnExpenses_Click;
+
             // btnBudget
-            this.btnBudget.Location = new System.Drawing.Point(30, 170);
-            this.btnBudget.Name = "btnBudget";
-            this.btnBudget.Size = new System.Drawing.Size(250, 40);
-            this.btnBudget.TabIndex = 3;
-            this.btnBudget.Text = "Set Budget";
-            this.btnBudget.UseVisualStyleBackColor = true;
-            this.btnBudget.Click += new System.EventHandler(this.btnBudget_Click);
+            btnBudget.Location = new Point(30, 170);
+            btnBudget.Name = "btnBudget";
+            btnBudget.Size = new Size(250, 40);
+            btnBudget.Text = "Set Budget";
+            btnBudget.UseVisualStyleBackColor = true;
+            btnBudget.Click += btnBudget_Click;
 
             // btnCategories
-            this.btnCategories.Location = new System.Drawing.Point(30, 220);
-            this.btnCategories.Name = "btnCategories";
-            this.btnCategories.Size = new System.Drawing.Size(250, 40);
-            this.btnCategories.TabIndex = 4;
-            this.btnCategories.Text = "Manage Categories";
-            this.btnCategories.UseVisualStyleBackColor = true;
-            this.btnCategories.Click += new System.EventHandler(this.btnCategories_Click);
+            btnCategories.Location = new Point(30, 220);
+            btnCategories.Name = "btnCategories";
+            btnCategories.Size = new Size(250, 40);
+            btnCategories.Text = "Manage Categories";
+            btnCategories.UseVisualStyleBackColor = true;
+            btnCategories.Click += btnCategories_Click;
+
+            // chartSummary
+            chartArea1.Name = "ChartArea1";
+            chartSummary.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chartSummary.Legends.Add(legend1);
+            chartSummary.Location = new Point(320, 70);
+            chartSummary.Name = "chartSummary";
+            chartSummary.Size = new Size(370, 350);
+            chartSummary.Text = "Income Chart";
 
             // MainForm
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 300);
-            this.Controls.Add(this.lblWelcome);
-            this.Controls.Add(this.btnIncome);
-            this.Controls.Add(this.btnExpenses);
-            this.Controls.Add(this.btnBudget);
-            this.Controls.Add(this.btnCategories);
-            this.Name = "MainForm";
-            this.Text = "Dashboard - Expense Tracker";
-            this.Load += new System.EventHandler(this.MainForm_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(725, 500);
+            Controls.Add(lblWelcome);
+            Controls.Add(btnIncome);
+            Controls.Add(btnExpenses);
+            Controls.Add(btnBudget);
+            Controls.Add(btnCategories);
+            Controls.Add(chartSummary);
+            Name = "MainForm";
+            Text = "Dashboard - Expense Tracker";
+            Load += MainForm_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
     }
 }

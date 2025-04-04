@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Data.SQLite;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
+using ExpenseTracker.Database;
+using Expense_Tracker; // ✅ Namespace for CategorizationForm
 
 namespace ExpenseTracker
 {
@@ -13,12 +17,14 @@ namespace ExpenseTracker
         private void MainForm_Load(object sender, EventArgs e)
         {
             lblWelcome.Text = "📊 Welcome to Expense Tracker Dashboard";
+            LoadChart(); // Show chart on startup
         }
 
         private void btnIncome_Click(object sender, EventArgs e)
         {
             Income_ManagementForm incomeForm = new Income_ManagementForm();
             incomeForm.ShowDialog();
+            LoadChart(); // Refresh chart after adding income
         }
 
         private void btnExpenses_Click(object sender, EventArgs e)
@@ -28,12 +34,53 @@ namespace ExpenseTracker
 
         private void btnBudget_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Budget module is coming soon.");
+            MessageBox.Show("Budget feature coming soon.");
         }
 
         private void btnCategories_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Category module is coming soon.");
+            // ✅ Open CategorizationForm when button is clicked
+            CategorizationForm catForm = new CategorizationForm();
+            catForm.ShowDialog();
+        }
+
+        private void LoadChart()
+        {
+            chartSummary.Series.Clear();
+            chartSummary.Titles.Clear();
+            chartSummary.Titles.Add("Income by Source");
+
+            var incomeSeries = new Series("Income")
+            {
+                ChartType = SeriesChartType.Pie,
+                IsValueShownAsLabel = true
+            };
+
+            try
+            {
+                using (var conn = income_managementdb.GetConnection())
+                {
+                    conn.Open();
+                    string query = @"SELECT Source, SUM(Amount) AS Total FROM Income GROUP BY Source";
+
+                    using (var cmd = new SQLiteCommand(query, conn))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string source = reader["Source"].ToString();
+                            double total = Convert.ToDouble(reader["Total"]);
+                            incomeSeries.Points.AddXY(source, total);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading chart: " + ex.Message);
+            }
+
+            chartSummary.Series.Add(incomeSeries);
         }
     }
 }
