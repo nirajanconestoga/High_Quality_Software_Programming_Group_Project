@@ -1,0 +1,86 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\High_Quality_Software_Programming_Group_Project\\Expense Tracker\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2AAD4090-3845-467C-BBB3-7492F6493456}|Expense Tracker.csproj|c:\\high_quality_software_programming_group_project\\expense tracker\\categorizationform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AAD4090-3845-467C-BBB3-7492F6493456}|Expense Tracker.csproj|solutionrelative:categorizationform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AAD4090-3845-467C-BBB3-7492F6493456}|Expense Tracker.csproj|c:\\high_quality_software_programming_group_project\\expense tracker\\database\\categorizationdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AAD4090-3845-467C-BBB3-7492F6493456}|Expense Tracker.csproj|solutionrelative:database\\categorizationdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AAD4090-3845-467C-BBB3-7492F6493456}|Expense Tracker.csproj|C:\\High_Quality_Software_Programming_Group_Project\\Expense Tracker\\categorizationform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2AAD4090-3845-467C-BBB3-7492F6493456}|Expense Tracker.csproj|solutionrelative:categorizationform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AAD4090-3845-467C-BBB3-7492F6493456}|Expense Tracker.csproj|c:\\high_quality_software_programming_group_project\\expense tracker\\categorizationform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AAD4090-3845-467C-BBB3-7492F6493456}|Expense Tracker.csproj|solutionrelative:categorizationform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CategorizationForm.cs",
+              "DocumentMoniker": "C:\\High_Quality_Software_Programming_Group_Project\\Expense Tracker\\CategorizationForm.cs",
+              "RelativeDocumentMoniker": "CategorizationForm.cs",
+              "ToolTip": "C:\\High_Quality_Software_Programming_Group_Project\\Expense Tracker\\CategorizationForm.cs",
+              "RelativeToolTip": "CategorizationForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-25T20:25:13.91Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CategorizationForm.cs [Design]",
+              "DocumentMoniker": "C:\\High_Quality_Software_Programming_Group_Project\\Expense Tracker\\CategorizationForm.cs",
+              "RelativeDocumentMoniker": "CategorizationForm.cs",
+              "ToolTip": "C:\\Users\\chara\\OneDrive\\Desktop\\ExpenseTracker\\Expense Tracker\\CategorizationForm.cs [Design]",
+              "RelativeToolTip": "..\\..\\Users\\chara\\OneDrive\\Desktop\\ExpenseTracker\\Expense Tracker\\CategorizationForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-25T20:09:05.3Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CategorizationForm.Designer.cs",
+              "DocumentMoniker": "C:\\High_Quality_Software_Programming_Group_Project\\Expense Tracker\\CategorizationForm.Designer.cs",
+              "RelativeDocumentMoniker": "CategorizationForm.Designer.cs",
+              "ToolTip": "C:\\High_Quality_Software_Programming_Group_Project\\Expense Tracker\\CategorizationForm.Designer.cs",
+              "RelativeToolTip": "CategorizationForm.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-26T20:19:23.348Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Categorizationdb.cs",
+              "DocumentMoniker": "C:\\High_Quality_Software_Programming_Group_Project\\Expense Tracker\\Database\\Categorizationdb.cs",
+              "RelativeDocumentMoniker": "Database\\Categorizationdb.cs",
+              "ToolTip": "C:\\High_Quality_Software_Programming_Group_Project\\Expense Tracker\\Database\\Categorizationdb.cs",
+              "RelativeToolTip": "Database\\Categorizationdb.cs",
+              "ViewState": "AgIAAEgAAAAQNjMzM/MlwEkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-25T20:17:09.527Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
