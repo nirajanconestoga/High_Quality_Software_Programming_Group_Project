@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Windows.Forms;
 using ExpenseTracker.Database;
@@ -16,3 +17,4 @@ namespace ExpenseTracker
         }
     }
 }
+
