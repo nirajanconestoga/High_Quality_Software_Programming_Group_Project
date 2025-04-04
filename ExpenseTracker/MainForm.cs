@@ -3,7 +3,7 @@ using System.Data.SQLite;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using ExpenseTracker.Database;
-using Expense_Tracker; // ✅ Namespace for CategorizationForm
+using Expense_Tracker; // Namespace for CategorizationForm and Budget
 
 namespace ExpenseTracker
 {
@@ -34,12 +34,14 @@ namespace ExpenseTracker
 
         private void btnBudget_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Budget feature coming soon.");
+            // Open the Budget form when the Manage Budget button is clicked
+            Budget budgetForm = new Budget(); // Assuming Budget is the class for the Budget form
+            budgetForm.ShowDialog();
         }
 
         private void btnCategories_Click(object sender, EventArgs e)
         {
-            // ✅ Open CategorizationForm when button is clicked
+            // Open CategorizationForm when the button is clicked
             CategorizationForm catForm = new CategorizationForm();
             catForm.ShowDialog();
         }
