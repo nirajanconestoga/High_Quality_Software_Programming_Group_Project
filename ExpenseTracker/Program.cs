@@ -12,7 +12,7 @@ namespace ExpenseTracker
             income_managementdb.InitializeDatabase(); // << Call this
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new DashboardForm());
         }
     }
 }
