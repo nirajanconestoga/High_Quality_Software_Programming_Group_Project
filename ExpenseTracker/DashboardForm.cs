@@ -7,17 +7,11 @@ using Expense_Tracker; // Namespace for CategorizationForm and Budget
 
 namespace ExpenseTracker
 {
-    public partial class MainForm : Form
+    public partial class DashboardForm : Form
     {
-        public MainForm()
+        public DashboardForm()
         {
             InitializeComponent();
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            lblWelcome.Text = "📊 Welcome to Expense Tracker Dashboard";
-            LoadChart(); // Show chart on startup
         }
 
         private void btnIncome_Click(object sender, EventArgs e)

@@ -152,3 +152,5 @@ C:\Users\shiva\source\repos\ExpenseTracker\ExpenseTracker\obj\Debug\net8.0-windo
 C:\Users\shiva\source\repos\ExpenseTracker\ExpenseTracker\obj\Debug\net8.0-windows\ExpenseTracker.Budget.resources
 >>>>>>> origin/Budgeting
 C:\Users\Nirajan\Desktop\High_Quality_Software_Programming_Group_Project\ExpenseTracker\obj\Debug\net8.0-windows\ExpenseTracker.Budget.resources
+C:\Users\Nirajan\Desktop\High_Quality_Software_Programming_Group_Project\ExpenseTracker\obj\Debug\net8.0-windows\ExpenseTracker.DashbaordForm.resources
+C:\Users\Nirajan\Desktop\High_Quality_Software_Programming_Group_Project\ExpenseTracker\obj\Debug\net8.0-windows\ExpenseTracker.DashboardForm.resources
