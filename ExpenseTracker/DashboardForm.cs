@@ -21,7 +21,7 @@ namespace ExpenseTracker
             // ✅ Initialize all relevant DBs
             income_managementdb.InitializeDatabase();
             Budgetdb.InitializeDatabase();
-            expenseForm.InitializeDatabase(); // ✅ Add this to avoid "no such table" errors
+            expenseForm.InitializeDatabase(); // ✅ Prevent "no such table" errors
 
             LoadChart(); // Load summary chart
         }
@@ -67,12 +67,14 @@ namespace ExpenseTracker
 
             try
             {
-                string month = DateTime.Now.ToString("MM");
+                // ✅ Updated to match stored month format
+                string fullMonthName = DateTime.Now.ToString("MMMM"); // "April"
+                string numericMonth = DateTime.Now.ToString("MM");    // "04"
                 string year = DateTime.Now.ToString("yyyy");
 
-                decimal income = income_managementdb.GetTotalIncomeForMonth(month, year);
-                decimal expenses = expenseForm.GetTotalExpensesForMonth(month, year);
-                decimal budget = Budgetdb.GetBudgetForMonth(month, year);
+                decimal income = income_managementdb.GetTotalIncomeForMonth(numericMonth, year);
+                decimal expenses = expenseForm.GetTotalExpensesForMonth(numericMonth, year);
+                decimal budget = Budgetdb.GetBudgetForMonth(fullMonthName, year);
                 decimal remaining = Math.Max(0, budget - expenses);
 
                 series.Points.AddXY("Income", income);

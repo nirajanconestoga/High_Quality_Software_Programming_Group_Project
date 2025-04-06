@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Windows.Forms;
+using Expense_Tracker.Database;
 
 namespace ExpenseTrackerApp
 {
@@ -10,23 +11,21 @@ namespace ExpenseTrackerApp
     {
         private static string dbPath = "Data Source=expenses.db";
 
-        // 🔁 Delegate & event for notifying Dashboard
         public delegate void ExpenseSavedHandler();
         public event ExpenseSavedHandler ExpenseSaved;
 
         public expenseForm()
         {
             InitializeComponent();
-            LoadExpenses();  // Load data into grid (DB already initialized before this is shown)
+            InitializeDatabase();
+            LoadCategoriesIntoComboBox();
+            LoadExpenses();
         }
 
-        // ✅ Make this callable without opening the form
         public static void InitializeDatabase()
         {
             if (!File.Exists("expenses.db"))
-            {
                 SQLiteConnection.CreateFile("expenses.db");
-            }
 
             using (var conn = new SQLiteConnection(dbPath))
             {
@@ -47,12 +46,33 @@ namespace ExpenseTrackerApp
             }
         }
 
+        private void LoadCategoriesIntoComboBox()
+        {
+            try
+            {
+                cmbCategory.Items.Clear();
+                var dt = Categorizationdb.GetAllCategories();
+
+                foreach (DataRow row in dt.Rows)
+                    cmbCategory.Items.Add(row["Name"].ToString());
+
+                if (cmbCategory.Items.Count > 0)
+                    cmbCategory.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading categories: " + ex.Message);
+            }
+        }
+
         private void ClearForm()
         {
             txtAmount.Text = "";
-            txtCategory.Text = "";
             txtDescription.Text = "";
             datePicker.Value = DateTime.Today;
+
+            if (cmbCategory.Items.Count > 0)
+                cmbCategory.SelectedIndex = 0;
         }
 
         private void LoadExpenses()
@@ -62,10 +82,8 @@ namespace ExpenseTrackerApp
                 using (var conn = new SQLiteConnection(dbPath))
                 {
                     conn.Open();
-                    string selectQuery = "SELECT * FROM Expenses ORDER BY Date DESC";
-
-                    using (var cmd = new SQLiteCommand(selectQuery, conn))
-                    using (var adapter = new SQLiteDataAdapter(cmd))
+                    string query = "SELECT * FROM Expenses ORDER BY Date DESC";
+                    using (var adapter = new SQLiteDataAdapter(query, conn))
                     {
                         var table = new DataTable();
                         adapter.Fill(table);
@@ -73,7 +91,7 @@ namespace ExpenseTrackerApp
                     }
                 }
 
-                dgvExpenses.Columns["Id"].Visible = false; // Hide ID column
+                dgvExpenses.Columns["Id"].Visible = false;
                 dgvExpenses.AutoResizeColumns();
                 dgvExpenses.AutoResizeRows();
             }
@@ -93,7 +111,7 @@ namespace ExpenseTrackerApp
                     return;
                 }
 
-                string category = txtCategory.Text.Trim();
+                string category = cmbCategory.SelectedItem?.ToString() ?? "";
                 string date = datePicker.Value.ToString("yyyy-MM-dd");
                 string description = txtDescription.Text.Trim();
 
@@ -135,8 +153,8 @@ namespace ExpenseTrackerApp
 
             try
             {
-                var selectedRow = dgvExpenses.SelectedRows[0];
-                int id = Convert.ToInt32(selectedRow.Cells["Id"].Value);
+                var row = dgvExpenses.SelectedRows[0];
+                int id = Convert.ToInt32(row.Cells["Id"].Value);
 
                 if (!double.TryParse(txtAmount.Text, out double amount))
                 {
@@ -144,7 +162,7 @@ namespace ExpenseTrackerApp
                     return;
                 }
 
-                string category = txtCategory.Text.Trim();
+                string category = cmbCategory.SelectedItem?.ToString() ?? "";
                 string date = datePicker.Value.ToString("yyyy-MM-dd");
                 string description = txtDescription.Text.Trim();
 
@@ -189,18 +207,17 @@ namespace ExpenseTrackerApp
                 return;
             }
 
-            if (MessageBox.Show("Are you sure you want to delete this expense?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            var row = dgvExpenses.SelectedRows[0];
+            int id = Convert.ToInt32(row.Cells["Id"].Value);
+
+            if (MessageBox.Show("Are you sure you want to delete this expense?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 try
                 {
-                    var selectedRow = dgvExpenses.SelectedRows[0];
-                    int id = Convert.ToInt32(selectedRow.Cells["Id"].Value);
-
                     using (var conn = new SQLiteConnection(dbPath))
                     {
                         conn.Open();
                         string deleteQuery = "DELETE FROM Expenses WHERE Id = @id";
-
                         using (var cmd = new SQLiteCommand(deleteQuery, conn))
                         {
                             cmd.Parameters.AddWithValue("@id", id);
@@ -208,7 +225,7 @@ namespace ExpenseTrackerApp
                         }
                     }
 
-                    MessageBox.Show("Expense deleted successfully!");
+                    MessageBox.Show("Expense deleted!");
                     ClearForm();
                     LoadExpenses();
                     ExpenseSaved?.Invoke();
@@ -220,7 +237,6 @@ namespace ExpenseTrackerApp
             }
         }
 
-        // For dashboard chart use
         public static decimal GetTotalExpensesForMonth(string month, string year)
         {
             decimal total = 0;
@@ -229,7 +245,6 @@ namespace ExpenseTrackerApp
             {
                 conn.Open();
                 string query = "SELECT SUM(Amount) FROM Expenses WHERE strftime('%m', Date) = @month AND strftime('%Y', Date) = @year";
-
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@month", month.PadLeft(2, '0'));
@@ -243,8 +258,7 @@ namespace ExpenseTrackerApp
         }
         private void txtAmount_TextChanged(object sender, EventArgs e)
         {
-            // Not needed for now – remove if unnecessary
-        }
 
+        }
     }
 }

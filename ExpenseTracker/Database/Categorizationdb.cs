@@ -3,20 +3,25 @@ using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Windows.Forms;
-using ExpenseTracker.Database;
 
 namespace Expense_Tracker.Database
 {
-    public class Categorizationdb
+    public static class Categorizationdb
     {
-        private static string dbPath = DatabaseHelper.GetDatabasePath("budget.db");
+        private static string dbPath = Path.Combine(Application.StartupPath, "Database", "budget.db");
         private static string connectionString = $"Data Source={dbPath};Version=3;";
 
         public static void InitializeDatabase()
         {
             try
             {
-                using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+                if (!Directory.Exists(Path.GetDirectoryName(dbPath)))
+                    Directory.CreateDirectory(Path.GetDirectoryName(dbPath)!);
+
+                if (!File.Exists(dbPath))
+                    SQLiteConnection.CreateFile(dbPath);
+
+                using (var conn = new SQLiteConnection(connectionString))
                 {
                     conn.Open();
                     string createTableQuery = @"
@@ -24,13 +29,14 @@ namespace Expense_Tracker.Database
                             Id INTEGER PRIMARY KEY AUTOINCREMENT,
                             Name TEXT NOT NULL UNIQUE
                         );";
-                    SQLiteCommand cmd = new SQLiteCommand(createTableQuery, conn);
-                    cmd.ExecuteNonQuery();
+
+                    using (var cmd = new SQLiteCommand(createTableQuery, conn))
+                        cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("DB Init Error: " + ex.Message);
+                MessageBox.Show("Categorization DB Init Error: " + ex.Message);
             }
         }
 
@@ -38,22 +44,15 @@ namespace Expense_Tracker.Database
         {
             try
             {
-                using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+                using (var conn = new SQLiteConnection(connectionString))
                 {
                     conn.Open();
-
-                    // Ensure table exists before insert (failsafe)
-                    string ensureTableQuery = @"
-                        CREATE TABLE IF NOT EXISTS Categories (
-                            Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            Name TEXT NOT NULL UNIQUE
-                        );";
-                    new SQLiteCommand(ensureTableQuery, conn).ExecuteNonQuery();
-
                     string insertQuery = "INSERT OR IGNORE INTO Categories (Name) VALUES (@Name)";
-                    SQLiteCommand cmd = new SQLiteCommand(insertQuery, conn);
-                    cmd.Parameters.AddWithValue("@Name", categoryName);
-                    cmd.ExecuteNonQuery();
+                    using (var cmd = new SQLiteCommand(insertQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Name", categoryName);
+                        cmd.ExecuteNonQuery();
+                    }
                 }
             }
             catch (Exception ex)
@@ -68,12 +67,14 @@ namespace Expense_Tracker.Database
 
             try
             {
-                using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+                using (var conn = new SQLiteConnection(connectionString))
                 {
                     conn.Open();
                     string selectQuery = "SELECT * FROM Categories ORDER BY Name ASC";
-                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(selectQuery, conn);
-                    adapter.Fill(dt);
+                    using (var adapter = new SQLiteDataAdapter(selectQuery, conn))
+                    {
+                        adapter.Fill(dt);
+                    }
                 }
             }
             catch (Exception ex)

@@ -10,6 +10,7 @@ namespace Expense_Tracker
         public CategorizationForm()
         {
             InitializeComponent();
+            Load += Form1_Load;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -28,9 +29,7 @@ namespace Expense_Tracker
                 return;
             }
 
-            // Uses the overloaded method with just category name
             Categorizationdb.AddCategory(categoryName);
-
             txtCategoryInput.Clear();
             LoadCategories();
         }

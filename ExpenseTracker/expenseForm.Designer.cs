@@ -1,4 +1,5 @@
-﻿namespace ExpenseTrackerApp
+﻿
+namespace ExpenseTrackerApp
 {
     partial class expenseForm
     {
@@ -9,13 +10,14 @@
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblDescription;
         private System.Windows.Forms.TextBox txtAmount;
-        private System.Windows.Forms.TextBox txtCategory;
+        private System.Windows.Forms.ComboBox cmbCategory;
         private System.Windows.Forms.DateTimePicker datePicker;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.DataGridView dgvExpenses;
+
 
         protected override void Dispose(bool disposing)
         {
@@ -33,7 +35,7 @@
             lblDate = new Label();
             lblDescription = new Label();
             txtAmount = new TextBox();
-            txtCategory = new TextBox();
+            cmbCategory = new ComboBox();
             datePicker = new DateTimePicker();
             txtDescription = new TextBox();
             btnAdd = new Button();
@@ -92,13 +94,15 @@
             txtAmount.TabIndex = 4;
             txtAmount.TextChanged += txtAmount_TextChanged;
             // 
-            // txtCategory
+            // cmbCategory
             // 
-            txtCategory.Font = new Font("Segoe UI", 11F);
-            txtCategory.Location = new Point(170, 60);
-            txtCategory.Name = "txtCategory";
-            txtCategory.Size = new Size(300, 32);
-            txtCategory.TabIndex = 5;
+            cmbCategory = new ComboBox();
+            cmbCategory.Font = new Font("Segoe UI", 11F);
+            cmbCategory.Location = new Point(170, 60);
+            cmbCategory.Size = new Size(300, 32);
+            cmbCategory.DropDownStyle = ComboBoxStyle.DropDownList;
+            Controls.Add(cmbCategory);
+
             // 
             // datePicker
             // 
@@ -161,7 +165,7 @@
             dgvExpenses.Size = new Size(740, 300);
             dgvExpenses.TabIndex = 11;
             // 
-            // Form1
+            // expenseForm
             // 
             ClientSize = new Size(800, 570);
             Controls.Add(lblAmount);
@@ -169,7 +173,7 @@
             Controls.Add(lblDate);
             Controls.Add(lblDescription);
             Controls.Add(txtAmount);
-            Controls.Add(txtCategory);
+            Controls.Add(cmbCategory);
             Controls.Add(datePicker);
             Controls.Add(txtDescription);
             Controls.Add(btnAdd);
@@ -177,12 +181,13 @@
             Controls.Add(btnDelete);
             Controls.Add(dgvExpenses);
             Font = new Font("Segoe UI", 11F);
-            Name = "Form1";
+            Name = "expenseForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Expense Management";
             ((System.ComponentModel.ISupportInitialize)dgvExpenses).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
+
     }
 }
