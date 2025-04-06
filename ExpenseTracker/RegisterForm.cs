@@ -132,7 +132,7 @@ namespace ExpenseTracker
             string salt = PasswordHelper.GenerateSalt();
             string passwordHash = PasswordHelper.HashPassword(password, salt);
 
-            using (var connection = Database.DatabaseHelper.GetConnection())
+            using (var connection = Database.Login_Registerdb.GetConnection())
             {
                 connection.Open();
 

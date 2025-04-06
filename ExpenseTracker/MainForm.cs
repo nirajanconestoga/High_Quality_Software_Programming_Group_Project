@@ -8,7 +8,7 @@ namespace ExpenseTracker
         public MainForm()
         {
             InitializeComponent();
-            Database.DatabaseHelper.InitializeDatabase();
+            Database.Login_Registerdb.InitializeDatabase();
         }
 
         private void userToolStripMenuItem_Click(object sender, EventArgs e)

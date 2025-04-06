@@ -28,7 +28,7 @@ namespace ExpenseTracker
 
             try
             {
-                using (var connection = Database.DatabaseHelper.GetConnection())
+                using (var connection = Database.Login_Registerdb.GetConnection())
                 {
                     connection.Open();
                     string selectUser = "SELECT PasswordHash, Salt FROM Users WHERE Username = @username";
@@ -73,6 +73,11 @@ namespace ExpenseTracker
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void txtUsername_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

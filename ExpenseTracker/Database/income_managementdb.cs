@@ -6,11 +6,12 @@ namespace ExpenseTracker.Database
 {
     public static class income_managementdb
     {
-        private static string dbPath = "Data Source=expense_tracker.db;Version=3;";
+        private static string dbPath = DatabaseHelper.GetDatabasePath("expense_tracker.db");
+        private static string connectionString = $"Data Source={dbPath};Version=3;";
 
         public static SQLiteConnection GetConnection()
         {
-            return new SQLiteConnection(dbPath);
+            return new SQLiteConnection(connectionString);
         }
 
         public static void InitializeDatabase()
@@ -18,12 +19,13 @@ namespace ExpenseTracker.Database
             using (var conn = GetConnection())
             {
                 conn.Open();
-                string query = @"CREATE TABLE IF NOT EXISTS Income (
-                                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                    Source TEXT NOT NULL,
-                                    Amount REAL NOT NULL,
-                                    Date TEXT NOT NULL
-                                );";
+                string query = @"
+                    CREATE TABLE IF NOT EXISTS Income (
+                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        Source TEXT NOT NULL,
+                        Amount REAL NOT NULL,
+                        Date TEXT NOT NULL
+                    );";
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
                     cmd.ExecuteNonQuery();
@@ -93,7 +95,6 @@ namespace ExpenseTracker.Database
             }
         }
 
-        // 🔁 NEW: Get total income for a specific month & year
         public static decimal GetTotalIncomeForMonth(string month, string year)
         {
             decimal total = 0;
@@ -101,14 +102,11 @@ namespace ExpenseTracker.Database
             using (var conn = GetConnection())
             {
                 conn.Open();
-
                 string query = "SELECT SUM(Amount) FROM Income WHERE strftime('%m', Date) = @month AND strftime('%Y', Date) = @year";
-
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@month", month.PadLeft(2, '0'));
                     cmd.Parameters.AddWithValue("@year", year);
-
                     var result = cmd.ExecuteScalar();
                     total = result != DBNull.Value ? Convert.ToDecimal(result) : 0;
                 }

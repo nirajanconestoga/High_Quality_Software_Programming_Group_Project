@@ -3,25 +3,19 @@ using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Windows.Forms;
+using ExpenseTracker.Database;
 
 namespace Expense_Tracker.Database
 {
     public class Categorizationdb
     {
-        private static string dbDirectory = Path.Combine(Application.StartupPath, "Database");
-        private static string dbPath = Path.Combine(dbDirectory, "expenseTracker.db");
+        private static string dbPath = DatabaseHelper.GetDatabasePath("budget.db");
         private static string connectionString = $"Data Source={dbPath};Version=3;";
 
         public static void InitializeDatabase()
         {
             try
             {
-                if (!Directory.Exists(dbDirectory))
-                    Directory.CreateDirectory(dbDirectory);
-
-                if (!File.Exists(dbPath))
-                    SQLiteConnection.CreateFile(dbPath);
-
                 using (SQLiteConnection conn = new SQLiteConnection(connectionString))
                 {
                     conn.Open();

@@ -14,7 +14,7 @@ namespace ExpenseTracker
             Application.SetCompatibleTextRenderingDefault(false);
 
             // Initialize the database (if needed)
-            DatabaseHelper.InitializeDatabase();
+            Login_Registerdb.InitializeDatabase();
 
             // Show the MainForm (Login/Register form) when the app starts
             Application.Run(new MainForm());

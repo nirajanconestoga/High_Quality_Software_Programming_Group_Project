@@ -59,16 +59,17 @@
             // txtUsername
             // 
             txtUsername.Location = new Point(120, 33);
-            txtUsername.Margin = new Padding(2, 2, 2, 2);
+            txtUsername.Margin = new Padding(2);
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(161, 27);
             txtUsername.TabIndex = 0;
             txtUsername.TabStop = false;
+            txtUsername.TextChanged += txtUsername_TextChanged;
             // 
             // txtPassword
             // 
             txtPassword.Location = new Point(120, 69);
-            txtPassword.Margin = new Padding(2, 2, 2, 2);
+            txtPassword.Margin = new Padding(2);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(161, 27);
@@ -77,7 +78,7 @@
             // btnLogin
             // 
             btnLogin.Location = new Point(120, 123);
-            btnLogin.Margin = new Padding(2, 2, 2, 2);
+            btnLogin.Margin = new Padding(2);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(64, 31);
             btnLogin.TabIndex = 2;
@@ -88,7 +89,7 @@
             // btnCancel
             // 
             btnCancel.Location = new Point(201, 123);
-            btnCancel.Margin = new Padding(2, 2, 2, 2);
+            btnCancel.Margin = new Padding(2);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(64, 31);
             btnCancel.TabIndex = 3;
@@ -110,7 +111,7 @@
             Controls.Add(lblPassword);
             Controls.Add(lblUsername);
             FormBorderStyle = FormBorderStyle.FixedDialog;
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "LoginForm";

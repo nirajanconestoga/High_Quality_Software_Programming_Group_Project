@@ -1,29 +1,23 @@
 ﻿using System;
 using System.Data.SQLite;
-using System.IO;
 using System.Windows.Forms;
 
 namespace ExpenseTracker.Database
 {
     public class Budgetdb
     {
-        private static string dbDirectory = Path.Combine(Application.StartupPath, "Database");
-        private static string dbPath = Path.Combine(dbDirectory, "budget.db");
+        // ✅ Use shared helper for consistent DB path
+        private static string dbPath = DatabaseHelper.GetDatabasePath("budget.db");
         private static string connectionString = $"Data Source={dbPath};Version=3;";
 
         public static void InitializeDatabase()
         {
             try
             {
-                if (!Directory.Exists(dbDirectory))
-                    Directory.CreateDirectory(dbDirectory);
-
-                if (!File.Exists(dbPath))
-                    SQLiteConnection.CreateFile(dbPath);
-
                 using (var conn = new SQLiteConnection(connectionString))
                 {
                     conn.Open();
+
                     string createTableQuery = @"
                         CREATE TABLE IF NOT EXISTS Settings (
                             Id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -73,7 +67,6 @@ namespace ExpenseTracker.Database
             }
         }
 
-        // 🔁 New method to get budget for a month/year (used in dashboard)
         public static decimal GetBudgetForMonth(string month, string year)
         {
             try
