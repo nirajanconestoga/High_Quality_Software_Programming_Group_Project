@@ -8,7 +8,7 @@ namespace ExpenseTrackerApp
 {
     public partial class expenseForm : Form
     {
-        string dbPath = "Data Source=expenses.db";
+        private static string dbPath = "Data Source=expenses.db";
 
         // 🔁 Delegate & event for notifying Dashboard
         public delegate void ExpenseSavedHandler();
@@ -17,11 +17,11 @@ namespace ExpenseTrackerApp
         public expenseForm()
         {
             InitializeComponent();
-            InitializeDatabase(); // <- Create DB + Table
-            LoadExpenses();       // <- Load data into grid
+            LoadExpenses();  // Load data into grid (DB already initialized before this is shown)
         }
 
-        private void InitializeDatabase()
+        // ✅ Make this callable without opening the form
+        public static void InitializeDatabase()
         {
             if (!File.Exists("expenses.db"))
             {
@@ -117,7 +117,7 @@ namespace ExpenseTrackerApp
                 MessageBox.Show("Expense added successfully!");
                 ClearForm();
                 LoadExpenses();
-                ExpenseSaved?.Invoke(); // 🔁 Notify Dashboard
+                ExpenseSaved?.Invoke();
             }
             catch (Exception ex)
             {
@@ -135,7 +135,7 @@ namespace ExpenseTrackerApp
 
             try
             {
-                DataGridViewRow selectedRow = dgvExpenses.SelectedRows[0];
+                var selectedRow = dgvExpenses.SelectedRows[0];
                 int id = Convert.ToInt32(selectedRow.Cells["Id"].Value);
 
                 if (!double.TryParse(txtAmount.Text, out double amount))
@@ -173,7 +173,7 @@ namespace ExpenseTrackerApp
                 MessageBox.Show("Expense updated successfully!");
                 ClearForm();
                 LoadExpenses();
-                ExpenseSaved?.Invoke(); // 🔁 Notify Dashboard
+                ExpenseSaved?.Invoke();
             }
             catch (Exception ex)
             {
@@ -189,16 +189,11 @@ namespace ExpenseTrackerApp
                 return;
             }
 
-            DialogResult result = MessageBox.Show("Are you sure you want to delete this expense?",
-                                                  "Confirm Delete",
-                                                  MessageBoxButtons.YesNo,
-                                                  MessageBoxIcon.Warning);
-
-            if (result == DialogResult.Yes)
+            if (MessageBox.Show("Are you sure you want to delete this expense?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 try
                 {
-                    DataGridViewRow selectedRow = dgvExpenses.SelectedRows[0];
+                    var selectedRow = dgvExpenses.SelectedRows[0];
                     int id = Convert.ToInt32(selectedRow.Cells["Id"].Value);
 
                     using (var conn = new SQLiteConnection(dbPath))
@@ -216,8 +211,7 @@ namespace ExpenseTrackerApp
                     MessageBox.Show("Expense deleted successfully!");
                     ClearForm();
                     LoadExpenses();
-
-                    ExpenseSaved?.Invoke(); // Optional: notify dashboard
+                    ExpenseSaved?.Invoke();
                 }
                 catch (Exception ex)
                 {
@@ -226,21 +220,14 @@ namespace ExpenseTrackerApp
             }
         }
 
-        private void txtAmount_TextChanged(object sender, EventArgs e)
-        {
-            // Optional: real-time validation
-        }
-
-        // 🔁 Static helper for Dashboard chart
+        // For dashboard chart use
         public static decimal GetTotalExpensesForMonth(string month, string year)
         {
             decimal total = 0;
-            string dbPath = "Data Source=expenses.db";
 
             using (var conn = new SQLiteConnection(dbPath))
             {
                 conn.Open();
-
                 string query = "SELECT SUM(Amount) FROM Expenses WHERE strftime('%m', Date) = @month AND strftime('%Y', Date) = @year";
 
                 using (var cmd = new SQLiteCommand(query, conn))
@@ -254,5 +241,10 @@ namespace ExpenseTrackerApp
 
             return total;
         }
+        private void txtAmount_TextChanged(object sender, EventArgs e)
+        {
+            // Not needed for now – remove if unnecessary
+        }
+
     }
 }

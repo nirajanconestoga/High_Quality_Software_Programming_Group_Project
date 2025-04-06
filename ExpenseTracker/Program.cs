@@ -10,6 +10,7 @@ namespace ExpenseTracker
         static void Main()
         {
             // Enable visual styles and other application settings
+            ExpenseTrackerApp.expenseForm.InitializeDatabase();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
