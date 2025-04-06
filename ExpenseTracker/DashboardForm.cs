@@ -3,7 +3,8 @@ using System.Data.SQLite;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using ExpenseTracker.Database;
-using Expense_Tracker; // Namespace for CategorizationForm and Budget
+using ExpenseTrackerApp;
+using Expense_Tracker;
 
 namespace ExpenseTracker
 {
@@ -12,30 +13,37 @@ namespace ExpenseTracker
         public DashboardForm()
         {
             InitializeComponent();
+            Load += DashboardForm_Load; // Hook up the form load event
+        }
+
+        private void DashboardForm_Load(object sender, EventArgs e)
+        {
+            LoadChart();
         }
 
         private void btnIncome_Click(object sender, EventArgs e)
         {
             Income_ManagementForm incomeForm = new Income_ManagementForm();
+            incomeForm.IncomeSaved += LoadChart;
             incomeForm.ShowDialog();
-            LoadChart(); // Refresh chart after adding income
         }
 
         private void btnExpenses_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Expense management module is under development.");
+            expenseForm expForm = new expenseForm();
+            expForm.ExpenseSaved += LoadChart;
+            expForm.ShowDialog();
         }
 
         private void btnBudget_Click(object sender, EventArgs e)
         {
-            // Open the Budget form when the Manage Budget button is clicked
-            Budget budgetForm = new Budget(); // Assuming Budget is the class for the Budget form
+            Budget budgetForm = new Budget();
+            budgetForm.BudgetSaved += (month, year, limit) => LoadChart(); // ✅ Hook event
             budgetForm.ShowDialog();
         }
 
         private void btnCategories_Click(object sender, EventArgs e)
         {
-            // Open CategorizationForm when the button is clicked
             CategorizationForm catForm = new CategorizationForm();
             catForm.ShowDialog();
         }
@@ -44,9 +52,9 @@ namespace ExpenseTracker
         {
             chartSummary.Series.Clear();
             chartSummary.Titles.Clear();
-            chartSummary.Titles.Add("Income by Source");
+            chartSummary.Titles.Add("Monthly Financial Overview");
 
-            var incomeSeries = new Series("Income")
+            var series = new Series("Summary")
             {
                 ChartType = SeriesChartType.Pie,
                 IsValueShownAsLabel = true
@@ -54,29 +62,31 @@ namespace ExpenseTracker
 
             try
             {
-                using (var conn = income_managementdb.GetConnection())
-                {
-                    conn.Open();
-                    string query = @"SELECT Source, SUM(Amount) AS Total FROM Income GROUP BY Source";
+                string month = DateTime.Now.ToString("MM");
+                string year = DateTime.Now.ToString("yyyy");
 
-                    using (var cmd = new SQLiteCommand(query, conn))
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            string source = reader["Source"].ToString();
-                            double total = Convert.ToDouble(reader["Total"]);
-                            incomeSeries.Points.AddXY(source, total);
-                        }
-                    }
-                }
+                decimal income = income_managementdb.GetTotalIncomeForMonth(month, year);
+                decimal expenses = expenseForm.GetTotalExpensesForMonth(month, year);
+                decimal budget = Budgetdb.GetBudgetForMonth(month, year);
+                decimal remaining = budget - expenses;
+
+                series.Points.AddXY("Income", income);
+                series.Points.AddXY("Expenses", expenses);
+                series.Points.AddXY("Remaining", remaining > 0 ? remaining : 0);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error loading chart: " + ex.Message);
             }
 
-            chartSummary.Series.Add(incomeSeries);
+            chartSummary.ChartAreas[0].Area3DStyle.Enable3D = true;
+            chartSummary.Legends[0].Docking = Docking.Bottom;
+            chartSummary.Series.Add(series);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            // Optional: add interactivity or info
         }
     }
 }

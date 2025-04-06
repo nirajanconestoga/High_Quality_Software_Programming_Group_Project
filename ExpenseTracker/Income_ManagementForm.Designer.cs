@@ -56,6 +56,7 @@
             txtSource.Name = "txtSource";
             txtSource.Size = new Size(125, 27);
             txtSource.TabIndex = 1;
+            txtSource.TextChanged += txtSource_TextChanged;
             // 
             // label2
             // 
@@ -128,7 +129,7 @@
             dgvIncome.Size = new Size(478, 264);
             dgvIncome.TabIndex = 10;
             // 
-            // Form1
+            // Income_ManagementForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -143,7 +144,7 @@
             Controls.Add(label2);
             Controls.Add(txtSource);
             Controls.Add(label1);
-            Name = "Form1";
+            Name = "Income_ManagementForm";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)dgvIncome).EndInit();
             ResumeLayout(false);

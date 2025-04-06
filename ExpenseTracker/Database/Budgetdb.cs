@@ -7,31 +7,23 @@ namespace ExpenseTracker.Database
 {
     public class Budgetdb
     {
-        // Runtime database directory inside bin/Debug/netX.X-windows/Database/
         private static string dbDirectory = Path.Combine(Application.StartupPath, "Database");
         private static string dbPath = Path.Combine(dbDirectory, "budget.db");
         private static string connectionString = $"Data Source={dbPath};Version=3;";
 
-        /// <summary>
-        /// Initializes the database: creates folder, file, and Settings table
-        /// </summary>
         public static void InitializeDatabase()
         {
             try
             {
-                // Create folder if it doesn't exist
                 if (!Directory.Exists(dbDirectory))
                     Directory.CreateDirectory(dbDirectory);
 
-                // Create database file if it doesn't exist
                 if (!File.Exists(dbPath))
                     SQLiteConnection.CreateFile(dbPath);
 
-                using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+                using (var conn = new SQLiteConnection(connectionString))
                 {
                     conn.Open();
-
-                    // Create table: Settings (with reserved word [Limit] handled)
                     string createTableQuery = @"
                         CREATE TABLE IF NOT EXISTS Settings (
                             Id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -40,7 +32,7 @@ namespace ExpenseTracker.Database
                             [Limit] REAL NOT NULL
                         );";
 
-                    SQLiteCommand cmd = new SQLiteCommand(createTableQuery, conn);
+                    var cmd = new SQLiteCommand(createTableQuery, conn);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -50,27 +42,22 @@ namespace ExpenseTracker.Database
             }
         }
 
-        /// <summary>
-        /// Saves or updates the monthly budget for a given month and year
-        /// </summary>
         public static bool SaveMonthlyBudget(string month, string year, decimal limit)
         {
             try
             {
-                using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+                using (var conn = new SQLiteConnection(connectionString))
                 {
                     conn.Open();
 
-                    // Remove existing entry for the same month & year (if any)
                     string deleteQuery = "DELETE FROM Settings WHERE Month = @Month AND Year = @Year";
-                    SQLiteCommand delCmd = new SQLiteCommand(deleteQuery, conn);
+                    var delCmd = new SQLiteCommand(deleteQuery, conn);
                     delCmd.Parameters.AddWithValue("@Month", month);
                     delCmd.Parameters.AddWithValue("@Year", year);
                     delCmd.ExecuteNonQuery();
 
-                    // Insert new budget record
                     string insertQuery = "INSERT INTO Settings (Month, Year, [Limit]) VALUES (@Month, @Year, @Limit)";
-                    SQLiteCommand cmd = new SQLiteCommand(insertQuery, conn);
+                    var cmd = new SQLiteCommand(insertQuery, conn);
                     cmd.Parameters.AddWithValue("@Month", month);
                     cmd.Parameters.AddWithValue("@Year", year);
                     cmd.Parameters.AddWithValue("@Limit", limit);
@@ -83,6 +70,32 @@ namespace ExpenseTracker.Database
             {
                 MessageBox.Show("Save Budget Error: " + ex.Message);
                 return false;
+            }
+        }
+
+        // 🔁 New method to get budget for a month/year (used in dashboard)
+        public static decimal GetBudgetForMonth(string month, string year)
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string query = "SELECT [Limit] FROM Settings WHERE Month = @Month AND Year = @Year";
+                    using (var cmd = new SQLiteCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Month", month);
+                        cmd.Parameters.AddWithValue("@Year", year);
+                        var result = cmd.ExecuteScalar();
+                        return result != null ? Convert.ToDecimal(result) : 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Get Budget Error: " + ex.Message);
+                return 0;
             }
         }
     }

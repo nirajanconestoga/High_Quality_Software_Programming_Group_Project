@@ -17,7 +17,7 @@ namespace ExpenseTracker
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Budget_Load(object sender, EventArgs e)
         {
             Database.Budgetdb.InitializeDatabase();
             cmbMonth.Items.AddRange(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames);
@@ -49,6 +49,16 @@ namespace ExpenseTracker
             {
                 BudgetSaved?.Invoke(month, year, limit);
             }
+        }
+
+        private void lblStatus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

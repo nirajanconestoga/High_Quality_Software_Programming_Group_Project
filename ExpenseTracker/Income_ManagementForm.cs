@@ -1,27 +1,31 @@
 ﻿using ExpenseTracker.Database;
+using System;
+using System.Windows.Forms;
 
 namespace ExpenseTracker
 {
-    // First class: Required for WinForms Designer to load correctly
-    // Event-driven programming: Inherits from Form
     public partial class Income_ManagementForm : Form
     {
+        // 🔁 Event to notify Dashboard
+        public delegate void IncomeSavedHandler();
+        public event IncomeSavedHandler IncomeSaved;
+
         public Income_ManagementForm()
         {
-            InitializeComponent(); // Designer-initialized UI components
+            InitializeComponent();
         }
-        // Event handler for form load
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            income_managementdb.InitializeDatabase(); // DB setup
-            LoadIncomeData();                         // Load data into grid
+            income_managementdb.InitializeDatabase();
+            LoadIncomeData();
         }
-        // Data Binding: Populate DataGridView with income records
+
         private void LoadIncomeData()
         {
             dgvIncome.DataSource = income_managementdb.GetIncomeList();
         }
-        // Constructor + Encapsulation used to create object
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try
@@ -31,16 +35,18 @@ namespace ExpenseTracker
                     double.Parse(txtAmount.Text),
                     dtpDate.Value
                 );
-                // Encapsulated values passed to DB method
+
                 income_managementdb.AddIncome(income.Source, income.Amount, income.Date);
                 LoadIncomeData();
                 ClearInputs();
+                IncomeSaved?.Invoke(); // 🔁 Notify Dashboard
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error adding income: " + ex.Message);
             }
         }
+
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             try
@@ -57,6 +63,7 @@ namespace ExpenseTracker
                     income_managementdb.UpdateIncome(income.Id, income.Source, income.Amount, income.Date);
                     LoadIncomeData();
                     ClearInputs();
+                    IncomeSaved?.Invoke(); // 🔁 Notify Dashboard
                 }
                 else
                 {
@@ -68,6 +75,7 @@ namespace ExpenseTracker
                 MessageBox.Show("Error updating income: " + ex.Message);
             }
         }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             try
@@ -89,7 +97,7 @@ namespace ExpenseTracker
                 MessageBox.Show("Error deleting income: " + ex.Message);
             }
         }
-        // Event-driven: triggered when a row in DataGridView is clicked
+
         private void dgvIncome_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -100,29 +108,34 @@ namespace ExpenseTracker
                 dtpDate.Value = DateTime.Parse(row.Cells["Date"].Value.ToString());
             }
         }
-        // Utility method: Reset form inputs
+
         private void ClearInputs()
         {
             txtSource.Text = "";
             txtAmount.Text = "";
             dtpDate.Value = DateTime.Today;
         }
+
+        private void txtSource_TextChanged(object sender, EventArgs e)
+        {
+            // Optional text changed logic
+        }
     }
-    // Encapsulation: A model class to hold income data in one object
+
     public class IncomeEntry
     {
         public int Id { get; set; }
         public string Source { get; set; }
         public double Amount { get; set; }
         public DateTime Date { get; set; }
-        // Constructor: Initialize income without ID (for Add)
+
         public IncomeEntry(string source, double amount, DateTime date)
         {
             Source = source;
             Amount = amount;
             Date = date;
         }
-        // Constructor: Initialize income with ID (for Update)
+
         public IncomeEntry(int id, string source, double amount, DateTime date)
         {
             Id = id;

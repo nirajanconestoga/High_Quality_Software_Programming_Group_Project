@@ -191,3 +191,6 @@ C:\Users\guliv\source\repos\ExpenseTracker\ExpenseTracker\obj\Debug\net8.0-windo
 >>>>>>> origin/User-Management
 C:\Users\Nirajan\Desktop\High_Quality_Software_Programming_Group_Project\ExpenseTracker\obj\Debug\net8.0-windows\ExpenseTracker.LoginForm.resources
 C:\Users\Nirajan\Desktop\High_Quality_Software_Programming_Group_Project\ExpenseTracker\obj\Debug\net8.0-windows\ExpenseTracker.RegisterForm.resources
+C:\Users\Nirajan\Desktop\High_Quality_Software_Programming_Group_Project\ExpenseTracker\obj\Debug\net8.0-windows\ExpenseTracker.expenseForm.resources
+C:\Users\Nirajan\Desktop\High_Quality_Software_Programming_Group_Project\ExpenseTracker\obj\Debug\net8.0-windows\ExpenseTrackerApp.expenseForm.resources
+C:\Users\Nirajan\Desktop\High_Quality_Software_Programming_Group_Project\ExpenseTracker\obj\Debug\net8.0-windows\Expense_Tracker.CategorizationForm.resources

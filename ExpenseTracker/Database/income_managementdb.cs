@@ -92,5 +92,29 @@ namespace ExpenseTracker.Database
                 }
             }
         }
+
+        // 🔁 NEW: Get total income for a specific month & year
+        public static decimal GetTotalIncomeForMonth(string month, string year)
+        {
+            decimal total = 0;
+
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+
+                string query = "SELECT SUM(Amount) FROM Income WHERE strftime('%m', Date) = @month AND strftime('%Y', Date) = @year";
+
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@month", month.PadLeft(2, '0'));
+                    cmd.Parameters.AddWithValue("@year", year);
+
+                    var result = cmd.ExecuteScalar();
+                    total = result != DBNull.Value ? Convert.ToDecimal(result) : 0;
+                }
+            }
+
+            return total;
+        }
     }
 }

@@ -41,61 +41,68 @@
             // lblUsername
             // 
             lblUsername.AutoSize = true;
-            lblUsername.Location = new Point(30, 50);
+            lblUsername.Location = new Point(63, 40);
+            lblUsername.Margin = new Padding(2, 0, 2, 0);
             lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(91, 25);
+            lblUsername.Size = new Size(75, 20);
             lblUsername.TabIndex = 0;
             lblUsername.Text = "Username";
             // 
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Location = new Point(30, 90);
+            lblPassword.Location = new Point(68, 76);
+            lblPassword.Margin = new Padding(2, 0, 2, 0);
             lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(87, 25);
+            lblPassword.Size = new Size(70, 20);
             lblPassword.TabIndex = 1;
             lblPassword.Text = "Password";
             // 
             // lblConfirmPassword
             // 
             lblConfirmPassword.AutoSize = true;
-            lblConfirmPassword.Location = new Point(0, 130);
+            lblConfirmPassword.Location = new Point(11, 104);
+            lblConfirmPassword.Margin = new Padding(2, 0, 2, 0);
             lblConfirmPassword.Name = "lblConfirmPassword";
-            lblConfirmPassword.Size = new Size(156, 25);
+            lblConfirmPassword.Size = new Size(127, 20);
             lblConfirmPassword.TabIndex = 2;
             lblConfirmPassword.Text = "Confirm Password";
             // 
             // txtUsername
             // 
-            txtUsername.Location = new Point(150, 47);
+            txtUsername.Location = new Point(151, 33);
+            txtUsername.Margin = new Padding(2, 2, 2, 2);
             txtUsername.MaxLength = 50;
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(200, 31);
+            txtUsername.Size = new Size(161, 27);
             txtUsername.TabIndex = 3;
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(150, 87);
+            txtPassword.Location = new Point(151, 69);
+            txtPassword.Margin = new Padding(2, 2, 2, 2);
             txtPassword.MaxLength = 50;
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
-            txtPassword.Size = new Size(200, 31);
+            txtPassword.Size = new Size(161, 27);
             txtPassword.TabIndex = 4;
             // 
             // txtConfirmPassword
             // 
-            txtConfirmPassword.Location = new Point(161, 127);
+            txtConfirmPassword.Location = new Point(151, 104);
+            txtConfirmPassword.Margin = new Padding(2, 2, 2, 2);
             txtConfirmPassword.MaxLength = 50;
             txtConfirmPassword.Name = "txtConfirmPassword";
             txtConfirmPassword.PasswordChar = '*';
-            txtConfirmPassword.Size = new Size(200, 31);
+            txtConfirmPassword.Size = new Size(161, 27);
             txtConfirmPassword.TabIndex = 5;
             // 
             // btnRegister
             // 
-            btnRegister.Location = new Point(150, 180);
+            btnRegister.Location = new Point(151, 144);
+            btnRegister.Margin = new Padding(2, 2, 2, 2);
             btnRegister.Name = "btnRegister";
-            btnRegister.Size = new Size(80, 30);
+            btnRegister.Size = new Size(84, 31);
             btnRegister.TabIndex = 6;
             btnRegister.Text = "Register";
             btnRegister.UseVisualStyleBackColor = true;
@@ -103,9 +110,10 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(250, 180);
+            btnCancel.Location = new Point(248, 144);
+            btnCancel.Margin = new Padding(2, 2, 2, 2);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(80, 30);
+            btnCancel.Size = new Size(64, 31);
             btnCancel.TabIndex = 7;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
@@ -113,9 +121,9 @@
             // 
             // RegisterForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(378, 244);
+            ClientSize = new Size(479, 256);
             Controls.Add(btnCancel);
             Controls.Add(btnRegister);
             Controls.Add(txtConfirmPassword);
@@ -125,6 +133,7 @@
             Controls.Add(lblPassword);
             Controls.Add(lblUsername);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(2, 2, 2, 2);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "RegisterForm";
