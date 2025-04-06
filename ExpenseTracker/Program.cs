@@ -1,16 +1,18 @@
-namespace ExpenseTrackerApp;
+﻿using System;
+using System.Windows.Forms;
+using ExpenseTracker.Database;
 
-static class Program
+namespace ExpenseTracker
 {
-    /// <summary>
-    ///  The main entry point for the application.
-    /// </summary>
-    [STAThread]
-    static void Main()
+    static class Program
     {
-        // To customize application configuration such as set high DPI settings or default font,
-        // see https://aka.ms/applicationconfiguration.
-        ApplicationConfiguration.Initialize();
-        Application.Run(new Form1());
-    }    
+        [STAThread]
+        static void Main()
+        {
+            income_managementdb.InitializeDatabase(); // << Call this
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Income_ManagementForm());
+        }
+    }
 }
