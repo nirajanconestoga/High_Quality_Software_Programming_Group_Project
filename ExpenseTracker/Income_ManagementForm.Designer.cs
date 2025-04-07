@@ -128,6 +128,7 @@
             dgvIncome.RowHeadersWidth = 51;
             dgvIncome.Size = new Size(478, 264);
             dgvIncome.TabIndex = 10;
+            dgvIncome.CellContentClick += dgvIncome_CellContentClick;
             // 
             // Income_ManagementForm
             // 
@@ -147,13 +148,14 @@
             Name = "Income_ManagementForm";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)dgvIncome).EndInit();
+            this.Load += new System.EventHandler(this.Form1_Load);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
+        private Label label1;   
         private TextBox txtSource;
         private Label label2;
         private Label label3;

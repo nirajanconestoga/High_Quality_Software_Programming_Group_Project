@@ -120,6 +120,11 @@ namespace ExpenseTracker
         {
             // Optional text changed logic
         }
+
+        private void dgvIncome_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 
     public class IncomeEntry
