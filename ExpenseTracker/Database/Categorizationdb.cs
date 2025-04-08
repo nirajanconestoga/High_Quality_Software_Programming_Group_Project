@@ -61,6 +61,49 @@ namespace Expense_Tracker.Database
             }
         }
 
+        public static void UpdateCategory(int id, string newName)
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(connectionString))
+                {
+                    conn.Open();
+                    string updateQuery = "UPDATE Categories SET Name = @Name WHERE Id = @Id";
+                    using (var cmd = new SQLiteCommand(updateQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Name", newName);
+                        cmd.Parameters.AddWithValue("@Id", id);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("DB Update Error: " + ex.Message);
+            }
+        }
+
+        public static void DeleteCategory(int id)
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(connectionString))
+                {
+                    conn.Open();
+                    string deleteQuery = "DELETE FROM Categories WHERE Id = @Id";
+                    using (var cmd = new SQLiteCommand(deleteQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", id);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("DB Delete Error: " + ex.Message);
+            }
+        }
+
         public static DataTable GetAllCategories()
         {
             DataTable dt = new DataTable();

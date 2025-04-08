@@ -30,23 +30,35 @@ namespace ExpenseTracker
         {
             try
             {
+                // Input validation
+                if (string.IsNullOrWhiteSpace(txtSource.Text) || string.IsNullOrWhiteSpace(txtAmount.Text))
+                {
+                    MessageBox.Show("Please enter both source and amount.");
+                    return;
+                }
+
+                if (!double.TryParse(txtAmount.Text, out double amount))
+                {
+                    MessageBox.Show("Please enter a valid numeric amount.");
+                    return;
+                }
+
                 var income = new IncomeEntry(
                     txtSource.Text,
-                    double.Parse(txtAmount.Text),
+                    amount,
                     dtpDate.Value
                 );
 
                 income_managementdb.AddIncome(income.Source, income.Amount, income.Date);
                 LoadIncomeData();
                 ClearInputs();
-                IncomeSaved?.Invoke(); // 🔁 Notify Dashboard
+                IncomeSaved?.Invoke(); // Notify Dashboard
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error adding income: " + ex.Message);
             }
         }
-
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             try
@@ -86,6 +98,7 @@ namespace ExpenseTracker
                     income_managementdb.DeleteIncome(id);
                     LoadIncomeData();
                     ClearInputs();
+                    IncomeSaved?.Invoke();
                 }
                 else
                 {
