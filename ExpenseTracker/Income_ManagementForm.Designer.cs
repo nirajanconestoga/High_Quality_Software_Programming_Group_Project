@@ -82,6 +82,7 @@
             txtAmount.Name = "txtAmount";
             txtAmount.Size = new Size(125, 27);
             txtAmount.TabIndex = 5;
+            txtAmount.TextChanged += txtAmount_TextChanged;
             // 
             // dtpDate
             // 
@@ -147,8 +148,8 @@
             Controls.Add(label1);
             Name = "Income_ManagementForm";
             Text = "Form1";
+            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)dgvIncome).EndInit();
-            this.Load += new System.EventHandler(this.Form1_Load);
             ResumeLayout(false);
             PerformLayout();
         }

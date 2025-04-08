@@ -18,10 +18,10 @@ namespace ExpenseTracker
 
         private void DashboardForm_Load(object sender, EventArgs e)
         {
-            // ✅ Initialize all relevant DBs
+            // Initialize all relevant DBs
             income_managementdb.InitializeDatabase();
             Budgetdb.InitializeDatabase();
-            expenseForm.InitializeDatabase(); // ✅ Prevent "no such table" errors
+            expenseForm.InitializeDatabase(); // Prevent "no such table" errors
 
             LoadChart(); // Load summary chart
         }
@@ -29,21 +29,21 @@ namespace ExpenseTracker
         private void btnIncome_Click(object sender, EventArgs e)
         {
             var incomeForm = new Income_ManagementForm();
-            incomeForm.IncomeSaved += LoadChart; // 🔁 Refresh chart on save
+            incomeForm.IncomeSaved += LoadChart; // Refresh chart on save
             incomeForm.ShowDialog();
         }
 
         private void btnExpenses_Click(object sender, EventArgs e)
         {
             var expForm = new expenseForm();
-            expForm.ExpenseSaved += LoadChart; // 🔁 Refresh chart on save
+            expForm.ExpenseSaved += LoadChart; // Refresh chart on save
             expForm.ShowDialog();
         }
 
         private void btnBudget_Click(object sender, EventArgs e)
         {
             var budgetForm = new Budget();
-            budgetForm.BudgetSaved += (month, year, limit) => LoadChart(); // 🔁 Refresh chart on save
+            budgetForm.BudgetSaved += (month, year, limit) => LoadChart(); // Refresh chart on save
             budgetForm.ShowDialog();
         }
 
@@ -67,9 +67,9 @@ namespace ExpenseTracker
 
             try
             {
-                // ✅ Updated to match stored month format
-                string fullMonthName = DateTime.Now.ToString("MMMM"); // "April"
-                string numericMonth = DateTime.Now.ToString("MM");    // "04"
+                // Updated to match stored month format
+                string fullMonthName = DateTime.Now.ToString("MMMM");
+                string numericMonth = DateTime.Now.ToString("MM");    
                 string year = DateTime.Now.ToString("yyyy");
 
                 decimal income = income_managementdb.GetTotalIncomeForMonth(numericMonth, year);
@@ -86,7 +86,7 @@ namespace ExpenseTracker
                 MessageBox.Show("Error loading chart: " + ex.Message);
             }
 
-            // ✅ Chart visual settings
+            // Chart visual settings
             if (chartSummary.ChartAreas.Count > 0)
                 chartSummary.ChartAreas[0].Area3DStyle.Enable3D = true;
 
