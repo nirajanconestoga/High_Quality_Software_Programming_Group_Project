@@ -11,68 +11,98 @@ using System.Windows.Forms;
 
 namespace ExpenseTracker
 {
-   public partial class LoginForm : Form
- {
-     public LoginForm()
-     {
-         InitializeComponent();
-     }
+    // Partial class extending Form (Windows Forms)
+    // Partial class concept: Allows splitting class definition across multiple files
+    public partial class LoginForm : Form
+    {
+        // Constructor
+        // Form lifecycle concept: Initializes form components
+        public LoginForm()
+        {
+            InitializeComponent();  // Auto-generated method to initialize UI components
+        }
 
-     private void btnLogin_Click(object sender, EventArgs e)
-     {
-         if (string.IsNullOrWhiteSpace(txtUsername.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
-         {
-             MessageBox.Show("Username and password are required!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-             return;
-         }
+        // Login button click event handler
+        // Event-driven programming concept: Responds to user interaction
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            // Input validation
+            // Defensive programming concept: Check for empty/null values
+            if (string.IsNullOrWhiteSpace(txtUsername.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                MessageBox.Show("Username and password are required!", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;  // Early exit pattern
+            }
 
-         try
-         {
-             using (var connection = Database.Login_Registerdb.GetConnection())
-             {
-                 connection.Open();
-                 string selectUser = "SELECT PasswordHash, Salt FROM Users WHERE Username = @username";
+            try  // Exception handling concept: Graceful error management
+            {
+                // Database connection pattern: Using ensures proper disposal
+                using (var connection = Database.Login_Registerdb.GetConnection())
+                {
+                    connection.Open();  // Connection must be explicitly opened
 
-                 using (var command = new SQLiteCommand(selectUser, connection))
-                 {
-                     command.Parameters.AddWithValue("@username", txtUsername.Text);
+                    // Parameterized SQL query
+                    // SQL injection prevention: Using parameters instead of string concatenation
+                    string selectUser = "SELECT PasswordHash, Salt FROM Users WHERE Username = @username";
 
-                     using (var reader = command.ExecuteReader())
-                     {
-                         if (reader.Read())
-                         {
-                             string storedHash = reader["PasswordHash"].ToString();
-                             string salt = reader["Salt"].ToString();
-                             string enteredHash = PasswordHelper.HashPassword(txtPassword.Text, salt);
+                    using (var command = new SQLiteCommand(selectUser, connection))
+                    {
+                        // Parameter binding
+                        command.Parameters.AddWithValue("@username", txtUsername.Text);
 
-                             if (storedHash == enteredHash)
-                             {
-                                 this.DialogResult = DialogResult.OK;
-                                 this.Close();
-                             }
-                             else
-                             {
-                                 MessageBox.Show("Invalid username or password!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                             }
-                         }
-                         else
-                         {
-                             MessageBox.Show("Invalid username or password!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                         }
-                     }
-                 }
-             }
-         }
-         catch (Exception ex)
-         {
-             MessageBox.Show("Login failed: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-         }
-     }
+                        // Data reader pattern: Forward-only, read-only result access
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())  // If user exists
+                            {
+                                // Retrieve stored credentials
+                                string storedHash = reader["PasswordHash"].ToString();
+                                string salt = reader["Salt"].ToString();
 
-     private void btnCancel_Click(object sender, EventArgs e)
-     {
-         this.DialogResult = DialogResult.Cancel;
-         this.Close();
-     }
-}
+                                // Password verification concept:
+                                // Hash entered password with stored salt for comparison
+                                string enteredHash = PasswordHelper.HashPassword(txtPassword.Text, salt);
+
+                                // Secure comparison
+                                if (storedHash == enteredHash)
+                                {
+                                    // Authentication success
+                                    // DialogResult concept: Communicates result to calling code
+                                    this.DialogResult = DialogResult.OK;
+                                    this.Close();  // Close form on success
+                                }
+                                else
+                                {
+                                    // Generic error message (security best practice)
+                                    MessageBox.Show("Invalid username or password!", "Error",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                            else
+                            {
+                                // User not found (same message for security)
+                                MessageBox.Show("Invalid username or password!", "Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)  // Catch-all for database/other errors
+            {
+                // Error reporting to user
+                MessageBox.Show("Login failed: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Cancel button click event handler
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            // Set dialog result and close
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();  // Form closing concept
+        }
+    }
 }
