@@ -12,80 +12,95 @@ using System.Windows.Forms;
 
 namespace ExpenseTracker
 {
-    public partial class RegisterForm : Form
-    {
-        public RegisterForm()
+    
+        // Partial class for user registration form
+        // Windows Forms inheritance: Inherits from Form base class
+        public partial class RegisterForm : Form
         {
-            InitializeComponent();
-
-            // Set form properties
-            this.Text = "User Registration";
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-
-            // Initialize controls (if not done in designer)
-            InitializeControls();
-        }
-
-        private void InitializeControls()
-        {
-            // Set up controls programmatically (optional - can be done in designer)
-            lblUsername.Text = "Username:";
-            lblPassword.Text = "Password:";
-            lblConfirmPassword.Text = "Confirm Password:";
-
-            txtPassword.PasswordChar = '*';
-            txtConfirmPassword.PasswordChar = '*';
-
-            btnRegister.Text = "Register";
-            btnCancel.Text = "Cancel";
-
-            // Set tab order
-            txtUsername.TabIndex = 0;
-            txtPassword.TabIndex = 1;
-            txtConfirmPassword.TabIndex = 2;
-            btnRegister.TabIndex = 3;
-            btnCancel.TabIndex = 4;
-        }
-
-        private void btnRegister_Click(object sender, EventArgs e)
-        {
-            // Reset dialog result
-            this.DialogResult = DialogResult.None;
-
-            // Validate inputs
-            if (!ValidateInputs())
-                return;
-
-            try
+            // Constructor
+            // Form initialization concept: Sets up form properties
+            public RegisterForm()
             {
-                // Attempt registration
-                if (RegisterNewUser())
+                InitializeComponent();  // Designer-generated initialization
+
+                // Form configuration
+                this.Text = "User Registration";  // Window title
+                this.StartPosition = FormStartPosition.CenterParent;  // Center on parent window
+                this.FormBorderStyle = FormBorderStyle.FixedDialog;  // Fixed-size dialog
+                this.MaximizeBox = false;  // Disable maximize button
+                this.MinimizeBox = false;  // Disable minimize button
+
+                // Additional control initialization
+                InitializeControls();
+            }
+
+            // Method to configure controls programmatically
+            // UI configuration concept: Alternative to designer setup
+            private void InitializeControls()
+            {
+                // Label setup
+                lblUsername.Text = "Username:";
+                lblPassword.Text = "Password:";
+                lblConfirmPassword.Text = "Confirm Password:";
+
+                // Password field configuration
+                txtPassword.PasswordChar = '*';  // Mask password input
+                txtConfirmPassword.PasswordChar = '*';
+
+                // Button setup
+                btnRegister.Text = "Register";
+                btnCancel.Text = "Cancel";
+
+                // Tab order configuration
+                // UI navigation concept: Controls tab sequence
+                txtUsername.TabIndex = 0;
+                txtPassword.TabIndex = 1;
+                txtConfirmPassword.TabIndex = 2;
+                btnRegister.TabIndex = 3;
+                btnCancel.TabIndex = 4;
+            }
+
+            // Register button click handler
+            // Event handling concept: Responds to user action
+            private void btnRegister_Click(object sender, EventArgs e)
+            {
+                this.DialogResult = DialogResult.None;  // Reset dialog result
+
+                // Input validation
+                // Data validation concept: Ensure valid input before processing
+                if (!ValidateInputs())
+                    return;
+
+                try
                 {
-                    MessageBox.Show("Registration successful! You can now login.",
-                                  "Success",
+                    // Registration attempt
+                    if (RegisterNewUser())
+                    {
+                        // Success notification
+                        MessageBox.Show("Registration successful! You can now login.",
+                                      "Success",
+                                      MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
+                        this.DialogResult = DialogResult.OK;  // Signal success
+                        this.Close();  // Close the form
+                    }
+                }
+                catch (SQLiteException ex)
+                {
+                    // Database-specific error handling
+                    HandleDatabaseError(ex);
+                }
+                catch (Exception ex)
+                {
+                    // General error handling
+                    MessageBox.Show($"An unexpected error occurred: {ex.Message}",
+                                  "Error",
                                   MessageBoxButtons.OK,
-                                  MessageBoxIcon.Information);
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
+                                  MessageBoxIcon.Error);
                 }
             }
-            catch (SQLiteException ex)
-            {
-                HandleDatabaseError(ex);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An unexpected error occurred: {ex.Message}",
-                              "Error",
-                              MessageBoxButtons.OK,
-                              MessageBoxIcon.Error);
-            }
-        }
 
-        private bool ValidateInputs()
+            private bool ValidateInputs()
         {
             // Check for empty fields
             if (string.IsNullOrWhiteSpace(txtUsername.Text))
@@ -123,12 +138,14 @@ namespace ExpenseTracker
             return true;
         }
 
+        // User registration method
+        // Database operation concept: CRUD operation (Create)
         private bool RegisterNewUser()
         {
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text;
 
-            // Generate salt and hash password
+            // Password security concept: Hashing with salt
             string salt = PasswordHelper.GenerateSalt();
             string passwordHash = PasswordHelper.HashPassword(password, salt);
 
@@ -136,8 +153,10 @@ namespace ExpenseTracker
             {
                 connection.Open();
 
-                // Check if username already exists
-                using (var checkCmd = new SQLiteCommand("SELECT COUNT(*) FROM Users WHERE Username = @username", connection))
+                // Check for existing username
+                // Database query concept: Scalar query
+                using (var checkCmd = new SQLiteCommand(
+                    "SELECT COUNT(*) FROM Users WHERE Username = @username", connection))
                 {
                     checkCmd.Parameters.AddWithValue("@username", username);
                     long count = (long)checkCmd.ExecuteScalar();
@@ -152,7 +171,8 @@ namespace ExpenseTracker
                     }
                 }
 
-                // Insert new user
+                // Insert new user record
+                // Parameterized query concept: Safe SQL execution
                 using (var insertCmd = new SQLiteCommand(
                     "INSERT INTO Users (Username, PasswordHash, Salt) VALUES (@username, @passwordHash, @salt)",
                     connection))
@@ -162,11 +182,13 @@ namespace ExpenseTracker
                     insertCmd.Parameters.AddWithValue("@salt", salt);
 
                     int rowsAffected = insertCmd.ExecuteNonQuery();
-                    return rowsAffected > 0;
+                    return rowsAffected > 0;  // Return true if insertion succeeded
                 }
             }
         }
 
+        // Database error handler
+        // Error handling specialization: SQLite-specific cases
         private void HandleDatabaseError(SQLiteException ex)
         {
             if (ex.Message.Contains("UNIQUE constraint failed"))
@@ -190,6 +212,8 @@ namespace ExpenseTracker
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
+       
     }
 }
 
