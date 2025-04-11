@@ -28,8 +28,9 @@
             dgvCategoryList = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dgvCategoryList).BeginInit();
             SuspendLayout();
-
+            // 
             // lblCategory
+            // 
             lblCategory.AutoSize = true;
             lblCategory.Font = new Font("Segoe UI", 11F);
             lblCategory.Location = new Point(20, 20);
@@ -38,15 +39,18 @@
             lblCategory.TabIndex = 0;
             lblCategory.Text = "New Category Name:";
             lblCategory.Click += lblCategory_Click;
-
+            // 
             // txtCategoryInput
+            // 
             txtCategoryInput.Font = new Font("Segoe UI", 11F);
             txtCategoryInput.Location = new Point(220, 18);
             txtCategoryInput.Name = "txtCategoryInput";
             txtCategoryInput.Size = new Size(220, 32);
             txtCategoryInput.TabIndex = 1;
-
+            txtCategoryInput.TextChanged += txtCategoryInput_TextChanged;
+            // 
             // btnAddCategory
+            // 
             btnAddCategory.Font = new Font("Segoe UI", 11F);
             btnAddCategory.Location = new Point(460, 17);
             btnAddCategory.Name = "btnAddCategory";
@@ -55,8 +59,9 @@
             btnAddCategory.Text = "Add";
             btnAddCategory.UseVisualStyleBackColor = true;
             btnAddCategory.Click += btnAddCategory_Click;
-
+            // 
             // btnUpdateCategory
+            // 
             btnUpdateCategory.Font = new Font("Segoe UI", 11F);
             btnUpdateCategory.Location = new Point(460, 60);
             btnUpdateCategory.Name = "btnUpdateCategory";
@@ -65,8 +70,9 @@
             btnUpdateCategory.Text = "Update";
             btnUpdateCategory.UseVisualStyleBackColor = true;
             btnUpdateCategory.Click += btnUpdateCategory_Click;
-
+            // 
             // btnDeleteCategory
+            // 
             btnDeleteCategory.Font = new Font("Segoe UI", 11F);
             btnDeleteCategory.Location = new Point(460, 105);
             btnDeleteCategory.Name = "btnDeleteCategory";
@@ -75,8 +81,9 @@
             btnDeleteCategory.Text = "Delete";
             btnDeleteCategory.UseVisualStyleBackColor = true;
             btnDeleteCategory.Click += btnDeleteCategory_Click;
-
+            // 
             // dgvCategoryList
+            // 
             dgvCategoryList.AllowUserToAddRows = false;
             dgvCategoryList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCategoryList.ColumnHeadersHeight = 29;
@@ -88,8 +95,9 @@
             dgvCategoryList.Size = new Size(560, 300);
             dgvCategoryList.TabIndex = 5;
             dgvCategoryList.CellClick += dgvCategoryList_CellClick;
-
+            // 
             // CategorizationForm
+            // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(620, 480);
