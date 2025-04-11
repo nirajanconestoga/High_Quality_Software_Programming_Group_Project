@@ -49,6 +49,7 @@
             label1.Size = new Size(143, 20);
             label1.TabIndex = 0;
             label1.Text = "Enter income source\n";
+            label1.Click += label1_Click;
             // 
             // txtSource
             // 
@@ -91,7 +92,7 @@
             dtpDate.Size = new Size(239, 27);
             dtpDate.TabIndex = 6;
             // 
-            // btnAdd
+            // btnAddIncome
             // 
             btnAdd.Location = new Point(440, 142);
             btnAdd.Name = "btnAdd";
@@ -99,9 +100,9 @@
             btnAdd.TabIndex = 7;
             btnAdd.Text = "Add income\n";
             btnAdd.UseVisualStyleBackColor = true;
-            btnAdd.Click += btnAdd_Click;
+            btnAdd.Click += btnAddIncome_Click;
             // 
-            // btnUpdate
+            // btnUpdateIncome
             // 
             btnUpdate.Location = new Point(160, 386);
             btnUpdate.Name = "btnUpdate";
@@ -109,9 +110,9 @@
             btnUpdate.TabIndex = 8;
             btnUpdate.Text = "Update selected\n";
             btnUpdate.UseVisualStyleBackColor = true;
-            btnUpdate.Click += btnUpdate_Click;
+            btnUpdate.Click += btnUpdateIncome_Click;
             // 
-            // btnDelete
+            // btnDeleteIncome
             // 
             btnDelete.Location = new Point(170, 340);
             btnDelete.Name = "btnDelete";
@@ -119,7 +120,7 @@
             btnDelete.TabIndex = 9;
             btnDelete.Text = "Delete selected\n";
             btnDelete.UseVisualStyleBackColor = true;
-            btnDelete.Click += btnDelete_Click;
+            btnDelete.Click += btnDeleteIncome_Click;
             // 
             // dgvIncome
             // 

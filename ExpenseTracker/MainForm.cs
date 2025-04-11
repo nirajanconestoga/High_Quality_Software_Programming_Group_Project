@@ -75,5 +75,10 @@ namespace ExpenseTracker
         {
             // Additional help options can be added here
         }
+
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

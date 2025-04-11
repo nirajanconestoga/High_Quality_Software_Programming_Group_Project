@@ -48,6 +48,7 @@
             lblMonth.Size = new Size(52, 20);
             lblMonth.TabIndex = 0;
             lblMonth.Text = "Month";
+            lblMonth.Click += lblMonth_Click;
             // 
             // lblYear
             // 
