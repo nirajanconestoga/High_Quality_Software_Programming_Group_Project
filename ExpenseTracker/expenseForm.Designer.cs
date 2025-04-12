@@ -1,10 +1,11 @@
-﻿
-namespace ExpenseTrackerApp
+﻿namespace ExpenseTrackerApp
 {
     partial class expenseForm
     {
+        // Container to hold components that need disposal
         private System.ComponentModel.IContainer components = null;
 
+        // UI Control declarations
         private System.Windows.Forms.Label lblAmount;
         private System.Windows.Forms.Label lblCategory;
         private System.Windows.Forms.Label lblDate;
@@ -18,22 +19,26 @@ namespace ExpenseTrackerApp
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.DataGridView dgvExpenses;
 
-
+        // Dispose method to clean up resources used by the form
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
             {
-                components.Dispose();
+                components.Dispose(); // Dispose component container
             }
             base.Dispose(disposing);
         }
 
+        // Method to initialize and configure all form components
         private void InitializeComponent()
         {
+            // Initialize label for "Amount"
             lblAmount = new Label();
             lblCategory = new Label();
             lblDate = new Label();
             lblDescription = new Label();
+
+            // Initialize text boxes and other controls
             txtAmount = new TextBox();
             cmbCategory = new ComboBox();
             datePicker = new DateTimePicker();
@@ -42,8 +47,11 @@ namespace ExpenseTrackerApp
             btnEdit = new Button();
             btnDelete = new Button();
             dgvExpenses = new DataGridView();
+
+            // Begin UI layout suspension for performance
             ((System.ComponentModel.ISupportInitialize)dgvExpenses).BeginInit();
             SuspendLayout();
+
             // 
             // lblAmount
             // 
@@ -54,6 +62,7 @@ namespace ExpenseTrackerApp
             lblAmount.Size = new Size(83, 25);
             lblAmount.TabIndex = 0;
             lblAmount.Text = "Amount:";
+
             // 
             // lblCategory
             // 
@@ -64,6 +73,7 @@ namespace ExpenseTrackerApp
             lblCategory.Size = new Size(92, 25);
             lblCategory.TabIndex = 1;
             lblCategory.Text = "Category:";
+
             // 
             // lblDate
             // 
@@ -74,6 +84,7 @@ namespace ExpenseTrackerApp
             lblDate.Size = new Size(55, 25);
             lblDate.TabIndex = 2;
             lblDate.Text = "Date:";
+
             // 
             // lblDescription
             // 
@@ -84,6 +95,7 @@ namespace ExpenseTrackerApp
             lblDescription.Size = new Size(112, 25);
             lblDescription.TabIndex = 3;
             lblDescription.Text = "Description:";
+
             // 
             // txtAmount
             // 
@@ -92,7 +104,8 @@ namespace ExpenseTrackerApp
             txtAmount.Name = "txtAmount";
             txtAmount.Size = new Size(300, 32);
             txtAmount.TabIndex = 4;
-            txtAmount.TextChanged += txtAmount_TextChanged;
+            txtAmount.TextChanged += txtAmount_TextChanged; // Event handler for amount field input change
+
             // 
             // cmbCategory
             // 
@@ -100,18 +113,19 @@ namespace ExpenseTrackerApp
             cmbCategory.Font = new Font("Segoe UI", 11F);
             cmbCategory.Location = new Point(170, 60);
             cmbCategory.Size = new Size(300, 32);
-            cmbCategory.DropDownStyle = ComboBoxStyle.DropDownList;
-            Controls.Add(cmbCategory);
+            cmbCategory.DropDownStyle = ComboBoxStyle.DropDownList; // Restrict input to dropdown options
+            Controls.Add(cmbCategory); // Add ComboBox to form controls
 
             // 
             // datePicker
             // 
             datePicker.Font = new Font("Segoe UI", 11F);
-            datePicker.Format = DateTimePickerFormat.Short;
+            datePicker.Format = DateTimePickerFormat.Short; // Use short date format (MM/dd/yyyy)
             datePicker.Location = new Point(170, 100);
             datePicker.Name = "datePicker";
             datePicker.Size = new Size(300, 32);
             datePicker.TabIndex = 6;
+
             // 
             // txtDescription
             // 
@@ -120,6 +134,7 @@ namespace ExpenseTrackerApp
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new Size(420, 32);
             txtDescription.TabIndex = 7;
+
             // 
             // btnAdd
             // 
@@ -129,7 +144,8 @@ namespace ExpenseTrackerApp
             btnAdd.Size = new Size(100, 35);
             btnAdd.TabIndex = 8;
             btnAdd.Text = "Add";
-            btnAdd.Click += btnAdd_Click;
+            btnAdd.Click += btnAdd_Click; // Event handler for add button click
+
             // 
             // btnEdit
             // 
@@ -139,7 +155,8 @@ namespace ExpenseTrackerApp
             btnEdit.Size = new Size(100, 35);
             btnEdit.TabIndex = 9;
             btnEdit.Text = "Edit";
-            btnEdit.Click += btnEdit_Click;
+            btnEdit.Click += btnEdit_Click; // Event handler for edit button click
+
             // 
             // btnDelete
             // 
@@ -149,25 +166,27 @@ namespace ExpenseTrackerApp
             btnDelete.Size = new Size(100, 35);
             btnDelete.TabIndex = 10;
             btnDelete.Text = "Delete";
-            btnDelete.Click += btnDelete_Click;
+            btnDelete.Click += btnDelete_Click; // Event handler for delete button click
+
             // 
             // dgvExpenses
             // 
-            dgvExpenses.AllowUserToAddRows = false;
+            dgvExpenses.AllowUserToAddRows = false; // Disallow manual row addition
             dgvExpenses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvExpenses.ColumnHeadersHeight = 29;
             dgvExpenses.Font = new Font("Segoe UI", 11F);
             dgvExpenses.Location = new Point(20, 240);
             dgvExpenses.Name = "dgvExpenses";
-            dgvExpenses.ReadOnly = true;
+            dgvExpenses.ReadOnly = true; // Make data grid read-only
             dgvExpenses.RowHeadersWidth = 51;
-            dgvExpenses.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvExpenses.SelectionMode = DataGridViewSelectionMode.FullRowSelect; // Allow full row selection
             dgvExpenses.Size = new Size(740, 300);
             dgvExpenses.TabIndex = 11;
+
             // 
             // expenseForm
             // 
-            ClientSize = new Size(800, 570);
+            ClientSize = new Size(800, 570); // Set the size of the form
             Controls.Add(lblAmount);
             Controls.Add(lblCategory);
             Controls.Add(lblDate);
@@ -181,13 +200,14 @@ namespace ExpenseTrackerApp
             Controls.Add(btnDelete);
             Controls.Add(dgvExpenses);
             Font = new Font("Segoe UI", 11F);
-            Name = "expenseForm";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Expense Management";
+            Name = "expenseForm"; // Set form name
+            StartPosition = FormStartPosition.CenterScreen; // Start the form in center of the screen
+            Text = "Expense Management"; // Set window title
+
+            // End layout suspension
             ((System.ComponentModel.ISupportInitialize)dgvExpenses).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
-
     }
 }
