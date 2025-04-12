@@ -2,9 +2,10 @@
 using System.Data.SQLite;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting; // Concept: Charting library for visualization
-using ExpenseTracker.Database;      // Concept: Namespaces for modular access to DB classes
+using income_ExpenseTracker.Database;      // Concept: Namespaces for modular access to DB classes
 using ExpenseTrackerApp;           // Used for accessing expenseForm
-using Expense_Tracker;             // Used for Budget and CategorizationForm
+using budget.Database;
+using BudgetTracker;             // Used for Budget
 
 namespace ExpenseTracker
 {
@@ -64,7 +65,7 @@ namespace ExpenseTracker
         // Open Categorization Form
         private void btnCategories_Click(object sender, EventArgs e)
         {
-            var catForm = new CategorizationForm();
+            var catForm = new catagorization_Tracker.CategorizationForm();
             catForm.ShowDialog(); // Simply opens the form; no event subscription
         }
 

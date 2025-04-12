@@ -1,9 +1,9 @@
 using System;
 using System.Data;
 using System.Windows.Forms;
-using Expense_Tracker.Database;
+using catagorization.Database;
 
-namespace Expense_Tracker
+namespace catagorization_Tracker
 {
     public partial class CategorizationForm : Form
     {

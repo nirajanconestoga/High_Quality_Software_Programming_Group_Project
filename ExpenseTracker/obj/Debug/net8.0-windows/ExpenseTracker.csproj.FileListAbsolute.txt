@@ -261,3 +261,5 @@ C:\High_Quality_Software_Programming_Group_Project\ExpenseTracker\bin\Debug\net8
 C:\High_Quality_Software_Programming_Group_Project\ExpenseTracker\obj\Debug\net8.0-windows\ExpenseT.567C5DF3.Up2Date
 C:\High_Quality_Software_Programming_Group_Project\ExpenseTracker\obj\Debug\net8.0-windows\ExpenseTracker.genruntimeconfig.cache
 C:\High_Quality_Software_Programming_Group_Project\ExpenseTracker\obj\Debug\net8.0-windows\ref\ExpenseTracker.dll
+C:\Users\Nirajan\Desktop\High_Quality_Software_Programming_Group_Project\ExpenseTracker\obj\Debug\net8.0-windows\BudgetTracker.Budget.resources
+C:\Users\Nirajan\Desktop\High_Quality_Software_Programming_Group_Project\ExpenseTracker\obj\Debug\net8.0-windows\catagorization_Tracker.CategorizationForm.resources

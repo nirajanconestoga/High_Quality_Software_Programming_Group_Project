@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using ExpenseTracker.Database;
+using budget.Database;
 
-namespace ExpenseTracker
+namespace BudgetTracker
 {
     // Delegate declaration
     // Defines a method signature to be used for the BudgetSaved event.
@@ -22,7 +22,7 @@ namespace ExpenseTracker
         private void Budget_Load(object sender, EventArgs e)
         {
             // Initialize database structure/tables if not already present.
-            Database.Budgetdb.InitializeDatabase();
+            Budgetdb.InitializeDatabase();
 
             // Populate the combo box with month names using culture info.
             cmbMonth.Items.AddRange(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames);
@@ -50,7 +50,7 @@ namespace ExpenseTracker
             }
 
             // Attempt to save data to the database.
-            bool success = Database.Budgetdb.SaveMonthlyBudget(month, year, limit);
+            bool success = Budgetdb.SaveMonthlyBudget(month, year, limit);
 
             // Display result to the user using a status label.
             lblStatus.Text = success ? "✅ Budget saved successfully!" : "❌ Failed to save budget.";

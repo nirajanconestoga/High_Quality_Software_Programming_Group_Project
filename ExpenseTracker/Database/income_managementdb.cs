@@ -2,13 +2,13 @@
 using System.Data;
 using System.Data.SQLite;
 
-namespace ExpenseTracker.Database
+namespace income_ExpenseTracker.Database
 {
     // Static class to handle all database operations related to income
     public static class income_managementdb
     {
         // Get the database file path from a helper (assumed to handle OS paths)
-        private static string dbPath = DatabaseHelper.GetDatabasePath("expense_tracker.db");
+        private static string dbPath = ExpenseTracker.Database.DatabaseHelper.GetDatabasePath("expense_tracker.db");
 
         // SQLite connection string using the path
         private static string connectionString = $"Data Source={dbPath};Version=3;";

@@ -4,7 +4,7 @@ using System.Data.SQLite;
 using System.IO;
 using System.Windows.Forms;
 
-namespace Expense_Tracker.Database
+namespace catagorization.Database
 {
     // Concept: Static class used for encapsulating DB access logic related to Categories
     public static class Categorizationdb

@@ -1,4 +1,4 @@
-﻿namespace Expense_Tracker
+﻿namespace catagorization_Tracker
 {
     partial class CategorizationForm
     {

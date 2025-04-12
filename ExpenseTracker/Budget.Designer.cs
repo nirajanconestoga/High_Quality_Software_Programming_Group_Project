@@ -1,4 +1,4 @@
-﻿namespace ExpenseTracker
+﻿namespace BudgetTracker
 
 {
     partial class Budget

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Data.SQLite;
 using System.Windows.Forms;
+using ExpenseTracker.Database;
 
-namespace ExpenseTracker.Database
+namespace budget.Database
 {
     public class Budgetdb
     {

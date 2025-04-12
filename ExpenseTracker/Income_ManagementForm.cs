@@ -1,4 +1,4 @@
-﻿using ExpenseTracker.Database;
+﻿using income_ExpenseTracker.Database;
 using System;
 using System.Windows.Forms;
 
@@ -20,7 +20,7 @@ namespace ExpenseTracker
         private void Form1_Load(object sender, EventArgs e)
         {
             // Concept: Initialization of external database logic
-            income_managementdb.InitializeDatabase();
+            income_ExpenseTracker.Database.income_managementdb.InitializeDatabase();
             LoadIncomeData(); // Load data into DataGridView when form loads
         }
 
@@ -28,7 +28,7 @@ namespace ExpenseTracker
         private void LoadIncomeData()
         {
             // Concept: Data Binding - connecting DB data to UI
-            dgvIncome.DataSource = income_managementdb.GetIncomeList();
+            dgvIncome.DataSource = income_ExpenseTracker.Database.income_managementdb.GetIncomeList();
         }
 
         // Button click handler to add new income entry
